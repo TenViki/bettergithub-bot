@@ -1,0 +1,13 @@
+{
+  "name": "bettergithub-bot",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "repository": "https://github.com/TenViki/bettergithub-bot",
+  "author": "TenViki <viktorkomarek28@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "discord.js": "^13.8.1",
+    "express": "^4.18.1",
+    "mongoose": "^6.4.4"
+  }
+}
