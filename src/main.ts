@@ -4,6 +4,7 @@ import express, { NextFunction, Request, Response } from "express";
 import { setupRoutes } from "./routes/router";
 import cors from "cors";
 import "express-async-errors";
+import { setup } from "./bot/bot";
 
 dotenv.config();
 
@@ -37,6 +38,9 @@ const main = async () => {
   app.listen(port, () => {
     console.log(`BetterGithub app is listening on port ${port}`);
   });
+
+  // Setup bot
+  setup();
 };
 
 main();
