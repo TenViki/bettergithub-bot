@@ -16,14 +16,16 @@ registerEvent("push", (event, bot, channel) => {
           commit.author.name
         }**
 ${commit.added
-  .map((file) => `<:add:996894889214226492>${formatFileName(file)}`)
-  .join("\n")}
-${commit.modified
-  .map((file) => `<:modify:996894888127901727>${formatFileName(file)}`)
-  .join("\n")}
-${commit.removed
-  .map((file) => `<:delete:996894886848630855>${formatFileName(file)}`)
-  .join("\n")}`
+  .map((file) => `<:add:996894889214226492>${formatFileName(file)}\n`)
+  .join("")}${commit.modified
+          .map(
+            (file) => `<:modify:996894888127901727>${formatFileName(file)}\n`
+          )
+          .join("")}${commit.removed
+          .map(
+            (file) => `<:delete:996894886848630855>${formatFileName(file)}\n`
+          )
+          .join("")}`
       )
       .join("\n\n"),
     "#dba90a",
