@@ -30,7 +30,7 @@ const main = async () => {
   setupRoutes(app);
 
   app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
-    console.error(err.stack);
+    console.error(err);
     res.status(500).send("Something broke!");
   });
 

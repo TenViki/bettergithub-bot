@@ -59,6 +59,7 @@ const Guild = () => {
               channel={channel}
               selectedChannel={selectedChannel}
               onSelect={() => setSelectedChannel(channel.id)}
+              guildId={data.data.guild.id}
             />
           ))}
       </div>

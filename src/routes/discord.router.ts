@@ -39,7 +39,8 @@ router.post(
 
     const guild = await discordService.getChannelsInGuild(
       req.auth,
-      req.params.guildId
+      req.params.guildId,
+      userGuilds
     );
 
     const channel = guild.channels.find(

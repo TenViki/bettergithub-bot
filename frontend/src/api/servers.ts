@@ -28,24 +28,24 @@ export const getChannels = (token: string, guildId: string) => {
   });
 };
 
-export const createWebhook = (
-  token: string,
-  guildId: string,
-  channelId: string
-) => {
+export const createWebhook = (options: {
+  token: string;
+  guildId: string;
+  channelId: string;
+}) => {
   return server.post<{
     guild: string;
     channel: string;
     _id: string;
   }>(
-    `/discord/guilds/${guildId}/${channelId}`,
+    `/discord/guilds/${options.guildId}/${options.channelId}`,
     {
-      guild: guildId,
-      channel: channelId,
+      guild: options.guildId,
+      channel: options.channelId,
     },
     {
       headers: {
-        Authorization: token,
+        Authorization: options.token,
       },
     }
   );

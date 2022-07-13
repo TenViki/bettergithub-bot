@@ -35,8 +35,12 @@ export const getGuilds = async (
   }));
 };
 
-export const getChannelsInGuild = async (auth: IAuth, guildId: string) => {
-  const userGuilds = await getUserGuilds(auth);
+export const getChannelsInGuild = async (
+  auth: IAuth,
+  guildId: string,
+  userGuilds?: UserGuilds[]
+) => {
+  if (!userGuilds) userGuilds = await getUserGuilds(auth);
   const adminUserGuilds = userGuilds.filter(
     (guild) => (guild.permissions & 0x8) === 0x8
   );
