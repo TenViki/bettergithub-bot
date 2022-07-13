@@ -2,13 +2,14 @@ import { NextFunction, Request, Response } from "express";
 import * as discordAuthService from "../services/discordauth.service";
 import jwt from "jsonwebtoken";
 import { DiscordUser } from "../types/auth";
-import { Auth } from "../models/auth.model";
+import { IAuth, Auth } from "../models/auth.model";
 
 // Global types for uwser in request
 declare global {
   namespace Express {
     interface Request {
       user?: DiscordUser;
+      auth?: IAuth;
     }
   }
 }
@@ -35,6 +36,7 @@ export const discordAuthMiddleware = async (
   const user = await discordAuthService.getDiscordUser(auth);
   if (user) {
     req.user = user;
+    req.auth = auth;
   }
   next();
 };
