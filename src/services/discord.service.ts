@@ -21,17 +21,34 @@ export const getUserGuilds = async (auth: IAuth) => {
 export const getGuilds = async (
   auth: IAuth
 ): Promise<(UserGuilds & { bot: boolean })[]> => {
-  console.log("Bot guilds: ", bot.guilds.cache);
   const userGuilds = await getUserGuilds(auth);
 
   // Only guilds where user has administrator permissions
   const userGuildsWithAdmin = userGuilds.filter(
     (guild) => (guild.permissions & 0x8) === 0x8
   );
-  console.log("User guilds with admin: ", userGuildsWithAdmin);
 
   return userGuildsWithAdmin.map((guild) => ({
     ...guild,
     bot: bot.guilds.cache.has(guild.id),
   }));
+};
+
+export const getChannelsInGuild = async (auth: IAuth, guildId: string) => {
+  const userGuilds = await getUserGuilds(auth);
+  const adminUserGuilds = userGuilds.filter(
+    (guild) => (guild.permissions & 0x8) === 0x8
+  );
+
+  if (!adminUserGuilds.find((guild) => guild.id === guildId)) {
+    throw new Error(
+      "User does not have administrator permissions in this guild"
+    );
+  }
+
+  const channels = bot.guilds.cache.get(guildId)!.channels.cache;
+  return {
+    channels: channels.map((channel) => channel),
+    guild: adminUserGuilds.find((guild) => guild.id === guildId)!,
+  };
 };

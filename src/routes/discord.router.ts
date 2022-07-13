@@ -10,4 +10,17 @@ discordRouter.get("/guilds", discordAuthMiddleware, async (req, res) => {
   res.send(guilds);
 });
 
+discordRouter.get(
+  "/guilds/:guildId",
+  discordAuthMiddleware,
+  async (req, res) => {
+    if (!req.auth) return res.status(401).send({ error: "Not authenticated" });
+    const guild = await discordService.getChannelsInGuild(
+      req.auth,
+      req.params.guildId
+    );
+    res.send(guild);
+  }
+);
+
 export default discordRouter;

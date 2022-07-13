@@ -1,3 +1,4 @@
+import { GuildBasedChannel } from "discord.js";
 import { server } from "../config/backend";
 import { UserGuilds } from "../types/discord";
 
@@ -7,4 +8,15 @@ export const getGuilds = (token: string) => {
       Authorization: token,
     },
   });
+};
+
+export const getChannels = (token: string, guildId: string) => {
+  return server.get<{ channels: GuildBasedChannel[]; guild: UserGuilds }>(
+    `/discord/guilds/${guildId}`,
+    {
+      headers: {
+        Authorization: token,
+      },
+    }
+  );
 };

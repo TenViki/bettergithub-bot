@@ -9,6 +9,7 @@ import { DiscordUser } from "./types/auth";
 import Navbar from "./components/nav/Navbar";
 import { getUser } from "./api/login";
 import Servers from "./pages/Servers";
+import Guild from "./pages/Guild";
 
 export const UserContext = React.createContext<{
   user: DiscordUser | null;
@@ -34,6 +35,7 @@ const Router = () => {
           <Route path="/" element={<Home />} />
           <Route path="/auth/redirect" element={<Redirect />} />
           <Route path="/servers" element={<Servers />} />
+          <Route path="/servers/:guildId" element={<Guild />} />
         </Routes>
       </main>
       <ToastContainer theme="dark" />

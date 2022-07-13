@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 import { FiChevronDown, FiChevronRight, FiUserPlus } from "react-icons/fi";
+import { useNavigate } from "react-router";
 import { UserGuilds as UserGuild } from "../../types/discord";
 import Button from "../button/Button";
 import "./ServerCard.scss";
@@ -9,6 +10,7 @@ interface ServerCardProps {
 }
 
 const ServerCard: FC<ServerCardProps> = ({ server }) => {
+  const navigate = useNavigate();
   return (
     <div className="server">
       <div className="server-icon">
@@ -28,7 +30,11 @@ const ServerCard: FC<ServerCardProps> = ({ server }) => {
 
       <div className="server-action">
         {server.bot ? (
-          <Button text="Manage" RightIcon={FiChevronRight} />
+          <Button
+            text="Manage"
+            RightIcon={FiChevronRight}
+            onClick={() => navigate(`/servers/${server.id}`)}
+          />
         ) : (
           <Button
             text="Invite"

@@ -19,7 +19,6 @@ const Servers = () => {
       onSuccess: (data) => {
         console.log(data);
       },
-      refetchInterval: 2000,
     }
   );
 

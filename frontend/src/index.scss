@@ -1,3 +1,5 @@
+@import "./config/theme.scss";
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -35,6 +37,46 @@ body,
     .d1,
     .d2 {
       background-color: gray;
+    }
+  }
+}
+
+.page {
+  margin: 1rem;
+
+  &-header {
+    display: flex;
+    align-items: center;
+
+    .icon-back {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      width: 2rem;
+      height: 100%;
+      transition: 0.2s;
+
+      &:hover {
+        color: $p1;
+      }
+
+      svg {
+        width: 1.7rem;
+        height: 1.7rem;
+      }
+    }
+
+    .server-icon-header {
+      width: 3rem;
+      height: 3rem;
+      margin: 0 1rem;
+      border-radius: 0.5rem;
+    }
+
+    h1 {
+      font-size: 1.7rem;
+      font-weight: 100;
     }
   }
 }

@@ -12,7 +12,6 @@ interface NavbarProps {
 }
 
 const Navbar: FC<NavbarProps> = ({ user, setUser }) => {
-  const location = useLocation();
   const inHome = useMatch({
     path: "/",
     end: true,
