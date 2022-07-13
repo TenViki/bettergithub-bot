@@ -41,7 +41,7 @@ const Channel: React.FC<ChannelProps> = ({
   const { isLoading, mutate } = useMutation(createWebhook, {
     onSuccess: (data) => {
       setWebhook(data.data);
-      setTimeout(() => handleWebhookCopy(), 300);
+      setTimeout(handleWebhookCopy, 300);
     },
   });
 
