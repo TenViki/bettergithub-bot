@@ -6,7 +6,6 @@ import { formatFileName } from "../../utils/emote";
 import { registerEvent } from "../bot";
 
 registerEvent("push", (event, bot, channel) => {
-  console.log(event);
   const embed = createEmbed(
     `${event.repository.name} - ${event.ref.split("/").pop()} (${
       event.commits.length
