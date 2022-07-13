@@ -2,6 +2,14 @@
   display: flex;
   padding: 1rem;
 
+  &.home {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10;
+  }
+
   &-links {
     flex-grow: 1;
     display: flex;
@@ -12,6 +20,15 @@
     color: #b4b4b4;
     transition: 0.2s;
     cursor: pointer;
+    text-decoration: none;
+
+    &.active {
+      color: #fff;
+    }
+
+    &:not(:last-child) {
+      margin-right: 1rem;
+    }
 
     &:hover {
       color: #fff;
