@@ -11,6 +11,7 @@
     "@types/jsonwebtoken": "^8.5.8",
     "axios": "^0.27.2",
     "cors": "^2.8.5",
+    "cross-env": "^7.0.3",
     "discord.js": "^13.8.1",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
@@ -23,6 +24,8 @@
     "ts-node-dev": "^2.0.0"
   },
   "scripts": {
-    "dev": "ts-node-dev src/main.ts"
+    "dev": "ts-node-dev src/main.ts",
+    "build": "ts-node src/main.ts",
+    "start": "npm run build && node dist/index.js"
   }
 }
