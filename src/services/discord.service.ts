@@ -1,6 +1,7 @@
 import axios from "axios";
 import { bot } from "../bot/bot";
 import { IAuth } from "../models/auth.model";
+import { Webhook } from "../models/webhook.model";
 import { UserGuilds } from "../types/discord";
 import { refreshToken } from "./discordauth.service";
 
@@ -47,10 +48,13 @@ export const getChannelsInGuild = async (auth: IAuth, guildId: string) => {
   }
 
   const channels = bot.guilds.cache.get(guildId)!.channels.cache;
+  const webhooks = await Webhook.find({ guildId });
+
   return {
     channels: channels.map((channel) => ({
       ...channel,
       canSendMessages: channel.permissionsFor(bot.user!)?.has("SEND_MESSAGES"),
+      webhook: webhooks.find((webhook) => webhook.channel === channel.id),
     })),
     guild: adminUserGuilds.find((guild) => guild.id === guildId)!,
   };
