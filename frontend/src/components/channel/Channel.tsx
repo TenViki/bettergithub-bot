@@ -23,7 +23,10 @@ const Channel: React.FC<ChannelProps> = ({
         selectedChannel === channel.id ? "opened" : ""
       }`}
     >
-      <div className="channel-header" onClick={onSelect}>
+      <div
+        className="channel-header"
+        onClick={() => channel.canSendMessages && onSelect()}
+      >
         <div className="channel-name">
           <FiHash /> {channel.name}
         </div>
