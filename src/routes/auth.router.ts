@@ -1,9 +1,12 @@
 import express from "express";
+import { discordAuthMiddleware } from "../middleware/discord-auth";
 import * as discordAuthService from "../services/discordauth.service";
 // Create router
 const authRouter = express.Router();
 
-authRouter.get("/", (req, res) => {});
+authRouter.get("/", discordAuthMiddleware, (req, res) => {
+  res.send(req.user);
+});
 
 authRouter.post("/", async (req, res) => {
   if (!req.body.code) {

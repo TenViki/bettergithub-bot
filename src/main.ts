@@ -1,8 +1,10 @@
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-import express from "express";
+import express, { NextFunction, Request, Response } from "express";
 import { setupRoutes } from "./routes/router";
 import cors from "cors";
+import "express-async-errors";
+
 dotenv.config();
 
 const main = async () => {
@@ -24,6 +26,11 @@ const main = async () => {
 
   // Import and setup routes
   setupRoutes(app);
+
+  app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+    console.error(err.stack);
+    res.status(500).send("Something broke!");
+  });
 
   // Start listening
   const port = process.env.PORT || 3000;
