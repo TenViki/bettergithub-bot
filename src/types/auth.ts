@@ -1,5 +1,3 @@
-import { Document } from "mongoose";
-
 export interface DiscordUser {
   id: string;
   username: string;

@@ -1,6 +1,6 @@
 import { Client } from "discord.js";
 
-const bot = new Client({
+export const bot = new Client({
   intents: ["GUILDS"],
   partials: ["USER"],
 });
