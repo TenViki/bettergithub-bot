@@ -6,4 +6,5 @@ export interface UserGuilds {
   permissions: number;
   features: string[];
   permissions_new: string;
+  bot: boolean;
 }

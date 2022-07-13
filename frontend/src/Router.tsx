@@ -8,6 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { DiscordUser } from "./types/auth";
 import Navbar from "./components/nav/Navbar";
 import { getUser } from "./api/login";
+import Servers from "./pages/Servers";
 
 export const UserContext = React.createContext<{
   user: DiscordUser | null;
@@ -32,6 +33,7 @@ const Router = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/auth/redirect" element={<Redirect />} />
+          <Route path="/servers" element={<Servers />} />
         </Routes>
       </main>
       <ToastContainer theme="dark" />
