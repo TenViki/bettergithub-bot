@@ -57,6 +57,8 @@ router.post(
       });
     }
 
+    await Webhook.deleteMany({ channel: channel.id });
+
     // Create webhook
     const webhook = await Webhook.create({
       channel: channel.id,
