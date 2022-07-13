@@ -15,8 +15,15 @@ registerEvent("push", (event, bot, channel) => {
         (commit) => `**[${commit.message}](${commit.url}) - ${
           commit.author.name
         }**
-- Files added (${commit.added.length}):
-${commit.added.map((file) => `\t${formatFileName(file)}`).join("\n")}`
+${commit.added
+  .map((file) => `<:add:996894889214226492>${formatFileName(file)}`)
+  .join("\n")}
+${commit.modified
+  .map((file) => `<:modify:996894888127901727>${formatFileName(file)}`)
+  .join("\n")}
+${commit.removed
+  .map((file) => `<:delete:996894886848630855>${formatFileName(file)}`)
+  .join("\n\n")}`
       )
       .join("\n"),
     "#dba90a",
