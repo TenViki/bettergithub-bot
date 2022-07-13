@@ -1,5 +1,5 @@
-import axios from "axios";
+import { server } from "../config/backend";
 
 export const sendCode = async (code: string) => {
-  return axios.post("/auth", { code });
+  return server.post("/auth", { code });
 };

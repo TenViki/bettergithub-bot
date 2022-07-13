@@ -3,8 +3,11 @@ import "./Home.scss";
 import { FaDiscord } from "react-icons/fa";
 import { FiChevronRight } from "react-icons/fi";
 import logo from "../assets/logo.png";
+import { useNavigate } from "react-router";
 
 const Home = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="home">
       <div className="hero">
@@ -17,6 +20,9 @@ const Home = () => {
             color="discord"
             LeftIcon={FaDiscord}
             RightIcon={FiChevronRight}
+            onClick={() =>
+              window.location.replace(import.meta.env.VITE_DISCORD_REDIRECT)
+            }
           />
         </div>
       </div>

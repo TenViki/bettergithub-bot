@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import express from "express";
 import { setupRoutes } from "./routes/router";
+import cors from "cors";
 dotenv.config();
 
 const main = async () => {
@@ -13,6 +14,13 @@ const main = async () => {
 
   const app = express();
   app.use(express.json());
+
+  // Use cors
+  app.use(
+    cors({
+      origin: ["http://localhost:3000"],
+    })
+  );
 
   // Import and setup routes
   setupRoutes(app);

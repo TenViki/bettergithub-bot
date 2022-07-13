@@ -16,6 +16,8 @@ const Redirect = () => {
   });
 
   React.useEffect(() => {
+    console.log("Triggered");
+
     // Get 'code' query parameter from URL
     const code = new URLSearchParams(window.location.search).get("code");
 
