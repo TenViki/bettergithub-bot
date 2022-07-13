@@ -23,9 +23,9 @@ ${commit.modified
   .join("\n")}
 ${commit.removed
   .map((file) => `<:delete:996894886848630855>${formatFileName(file)}`)
-  .join("\n\n")}`
+  .join("\n")}`
       )
-      .join("\n"),
+      .join("\n\n"),
     "#dba90a",
     event.sender
   );
