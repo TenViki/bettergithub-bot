@@ -65,7 +65,7 @@ router.post(
       guild: guild.guild.id,
     });
 
-    res.send({ ...webhook });
+    res.send({ ...webhook.toObject() });
   }
 );
 

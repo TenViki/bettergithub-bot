@@ -56,6 +56,7 @@ const Guild = () => {
           .filter((channel) => channel.type === "GUILD_TEXT")
           .map((channel) => (
             <Channel
+              key={channel.id}
               channel={channel}
               selectedChannel={selectedChannel}
               onSelect={() => setSelectedChannel(channel.id)}
