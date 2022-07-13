@@ -1,9 +1,10 @@
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import express, { NextFunction, Request, Response } from "express";
+import "express-async-errors";
+
 import { setupRoutes } from "./routes/router";
 import cors from "cors";
-import "express-async-errors";
 import { setup } from "./bot/bot";
 
 dotenv.config();

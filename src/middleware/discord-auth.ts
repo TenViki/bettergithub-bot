@@ -21,9 +21,18 @@ export const discordAuthMiddleware = async (
 ) => {
   const token = req.headers.authorization;
   if (!token) return res.status(401).send({ error: "Invalid token" });
-  const { sessionId } = jwt.verify(token, process.env.JWT_SECRET!) as {
-    sessionId: string;
-  };
+
+  let sessionId: string;
+
+  try {
+    sessionId = (
+      jwt.verify(token, process.env.JWT_SECRET!) as {
+        sessionId: string;
+      }
+    ).sessionId;
+  } catch (error) {
+    return res.status(401).send({ error: "Invalid token" });
+  }
 
   const auth = await Auth.findOne({
     _id: sessionId,

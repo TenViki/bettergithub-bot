@@ -1,6 +1,7 @@
 import express from "express";
 import { discordAuthMiddleware } from "../middleware/discord-auth";
 import * as discordAuthService from "../services/discordauth.service";
+import { DiscordUser } from "../types/auth";
 // Create router
 const authRouter = express.Router();
 
@@ -13,18 +14,15 @@ authRouter.post("/", async (req, res) => {
     res.status(400).send({ error: "Missing code" });
   }
 
-  let token: string;
+  let data: DiscordUser & { token: string };
 
   try {
-    token = await discordAuthService.getDiscordAuth(req.body.code);
+    data = await discordAuthService.getDiscordAuth(req.body.code);
   } catch (error) {
     return res.status(401).send({ error: "Invalid code" });
   }
 
-  res.send({
-    token: token,
-    message: "Code received",
-  });
+  res.send(data);
 });
 
 export default authRouter;

@@ -1,15 +1,32 @@
 import React from "react";
-import { QueryClient } from "react-query";
+import { QueryClient, useQuery } from "react-query";
 import { Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import Home from "./pages/Home";
 import Redirect from "./pages/Redirect";
 import "react-toastify/dist/ReactToastify.css";
+import { DiscordUser } from "./types/auth";
+import Navbar from "./components/nav/Navbar";
+import { getUser } from "./api/login";
+
+export const UserContext = React.createContext<{
+  user: DiscordUser | null;
+  setUser: React.Dispatch<React.SetStateAction<DiscordUser | null>>;
+}>({
+  user: null,
+  setUser: () => {},
+});
 
 const Router = () => {
+  const [user, setUser] = React.useState<DiscordUser | null>(null);
+  useQuery("user", () => getUser(localStorage.getItem("token")!), {
+    enabled: !!localStorage.getItem("token"),
+    onSuccess: (data) => setUser(data.data),
+  });
+
   return (
-    <>
-      <nav>hehe boi</nav>
+    <UserContext.Provider value={{ user, setUser }}>
+      <Navbar user={user} setUser={setUser} />
 
       <main>
         <Routes>
@@ -18,7 +35,7 @@ const Router = () => {
         </Routes>
       </main>
       <ToastContainer theme="dark" />
-    </>
+    </UserContext.Provider>
   );
 };
 

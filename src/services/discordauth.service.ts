@@ -51,9 +51,9 @@ export const getDiscordAuth = async (code: string) => {
     tokenExpires: new Date(Date.now() + response.data.expires_in * 1000),
   });
 
-  const token = createToken(auth._id.toString());
+  const token = await createToken(auth._id.toString());
 
-  return token;
+  return { token, ...data };
 };
 
 export const createToken = async (sessionId: string) => {

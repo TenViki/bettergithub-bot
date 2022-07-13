@@ -3,9 +3,13 @@ import { useMutation } from "react-query";
 import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
 import { sendCode } from "../api/login";
+import { UserContext } from "../Router";
+import { DiscordUser } from "../types/auth";
 
 const Redirect = () => {
   const navigate = useNavigate();
+
+  const { setUser } = React.useContext(UserContext);
 
   const sendCodeMutation = useMutation(sendCode, {
     onError: (err) => {
@@ -25,7 +29,14 @@ const Redirect = () => {
 
     // Send request to backend to exchange code for access token
 
-    sendCodeMutation.mutate(code);
+    sendCodeMutation.mutateAsync(code).then((data) => {
+      console.log(data);
+      const user = data.data as DiscordUser;
+      setUser(user);
+      navigate("/");
+
+      localStorage.setItem("token", data.data.token);
+    });
   }, []);
 
   return <div>Loading...</div>;
