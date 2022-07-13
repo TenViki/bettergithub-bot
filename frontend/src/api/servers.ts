@@ -11,12 +11,12 @@ export const getGuilds = (token: string) => {
 };
 
 export const getChannels = (token: string, guildId: string) => {
-  return server.get<{ channels: GuildBasedChannel[]; guild: UserGuilds }>(
-    `/discord/guilds/${guildId}`,
-    {
-      headers: {
-        Authorization: token,
-      },
-    }
-  );
+  return server.get<{
+    channels: (GuildBasedChannel & { canSendMessages: boolean })[];
+    guild: UserGuilds;
+  }>(`/discord/guilds/${guildId}`, {
+    headers: {
+      Authorization: token,
+    },
+  });
 };

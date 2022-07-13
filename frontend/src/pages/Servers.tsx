@@ -35,7 +35,7 @@ const Servers = () => {
       ) : (
         <div className="serverlist">
           {data?.data.map((guild) => (
-            <ServerCard server={guild} />
+            <ServerCard server={guild} key={guild.id} />
           ))}
         </div>
       )}

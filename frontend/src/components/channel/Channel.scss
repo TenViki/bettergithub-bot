@@ -1,0 +1,64 @@
+.channel {
+  margin-bottom: 0.5rem;
+  border-radius: 0.3rem;
+  width: 40rem;
+  max-width: calc(100vw - 2rem);
+
+  transition: 0.2s;
+
+  &-header {
+    padding: 0.5rem;
+  }
+
+  &:not(.locked) {
+    .channel-header {
+      cursor: pointer;
+    }
+
+    &:hover {
+      background-color: #252525;
+    }
+
+    &:active {
+      background-color: #333;
+    }
+  }
+
+  &-locked {
+    color: #999;
+    margin-top: 0.3rem;
+    display: flex;
+    align-items: center;
+
+    svg {
+      margin-right: 0.5rem;
+    }
+  }
+
+  &-name {
+    display: flex;
+    align-items: center;
+
+    svg {
+      width: 1.5rem;
+      height: 1.5rem;
+      color: #999;
+      margin-right: 0.5rem;
+    }
+  }
+
+  &-content {
+    max-height: 0;
+    overflow: hidden;
+    padding: 0 0.5rem;
+    transition: 0.2s;
+  }
+
+  &.opened {
+    background-color: #252525;
+    .channel-content {
+      max-height: 3.5rem;
+      padding: 0.5rem 0.5rem;
+    }
+  }
+}

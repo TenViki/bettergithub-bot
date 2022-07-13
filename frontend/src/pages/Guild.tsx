@@ -3,12 +3,16 @@ import { FiArrowLeft } from "react-icons/fi";
 import { useQuery } from "react-query";
 import { useNavigate, useParams } from "react-router";
 import { getChannels } from "../api/servers";
+import Channel from "../components/channel/Channel";
 import Loading from "../components/loading/Loading";
 import { UserContext } from "../Router";
+import "./Guild.scss";
 
 const Guild = () => {
   const { user } = React.useContext(UserContext);
   const guildId = useParams().guildId;
+
+  const [selectedChannel, setSelectedChannel] = React.useState<string>("");
 
   const navigate = useNavigate();
 
@@ -34,12 +38,29 @@ const Guild = () => {
         <div className="icon-back" onClick={() => navigate("/servers")}>
           <FiArrowLeft />
         </div>
-        <img
-          src={`https://cdn.discordapp.com/icons/${data.data.guild.id}/${data.data.guild.icon}.png`}
-          alt="Server icon"
-          className="server-icon-header"
-        />
+
+        {data.data.guild.icon ? (
+          <img
+            src={`https://cdn.discordapp.com/icons/${data.data.guild.id}/${data.data.guild.icon}.png`}
+            alt="Server icon"
+            className="server-icon-header"
+          />
+        ) : (
+          <div className="server-icon-letter">{data.data.guild.name[0]}</div>
+        )}
         <h1>{data.data.guild.name}</h1>
+      </div>
+
+      <div className="channels">
+        {data.data.channels
+          .filter((channel) => channel.type === "GUILD_TEXT")
+          .map((channel) => (
+            <Channel
+              channel={channel}
+              selectedChannel={selectedChannel}
+              onSelect={() => setSelectedChannel(channel.id)}
+            />
+          ))}
       </div>
     </div>
   );

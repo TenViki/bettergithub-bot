@@ -48,7 +48,10 @@ export const getChannelsInGuild = async (auth: IAuth, guildId: string) => {
 
   const channels = bot.guilds.cache.get(guildId)!.channels.cache;
   return {
-    channels: channels.map((channel) => channel),
+    channels: channels.map((channel) => ({
+      ...channel,
+      canSendMessages: channel.permissionsFor(bot.user!)?.has("SEND_MESSAGES"),
+    })),
     guild: adminUserGuilds.find((guild) => guild.id === guildId)!,
   };
 };
