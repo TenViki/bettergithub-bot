@@ -38,7 +38,7 @@ ${commit.added
           )
           .join("")}`
       )
-      .join("\n\n"),
+      .join("\n"),
     "#dba90a",
     event.sender
   );
