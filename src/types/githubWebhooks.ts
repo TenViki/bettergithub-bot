@@ -148,14 +148,45 @@ export interface GithubDelivery_Push extends GithubDelivery {
   };
 }
 
-export interface GithubDelivery_Star extends GithubDelivery {
-  event_type: "star";
-  idk: string;
+export interface GithubDelivery_WorkflowJob extends GithubDelivery {
+  event_type: "workflow_job";
+  action: "queued" | "in_progress" | "completed";
+  workflow_job: {
+    id: number;
+    run_id: number;
+    run_url: string;
+    run_attempt: number;
+    node_id: string;
+    head_sha: string;
+    url: string;
+    html_url: string;
+    status: string;
+    conclusion: string;
+    started_at: Date;
+    completed_at: Date;
+    name: string;
+    steps: {
+      name: string;
+      status: string;
+      conclusion: string;
+      number: number;
+      started_at: Date;
+      completed_at: Date;
+    }[];
+    check_run_url: string;
+    labels: string[];
+    runner_id: number;
+    runner_name: string;
+    runner_group_id: number;
+    runner_group_name: string;
+  };
 }
 
 export interface GithubEvents {
   push: GithubDelivery_Push;
-  star: GithubDelivery_Star;
+  star: GithubDelivery_WorkflowJob;
 }
 
-export type GithubDeliveryWebhook = GithubDelivery_Push | GithubDelivery_Star;
+export type GithubDeliveryWebhook =
+  | GithubDelivery_Push
+  | GithubDelivery_WorkflowJob;

@@ -10,9 +10,18 @@ router.post("/:webhookId", async (req, res) => {
     event_type: req.headers["x-github-event"],
   };
 
-  console.log(webhookObject);
-
   res.send("OK");
+
+  // Copy object
+  const objectForPrint: any = { ...webhookObject };
+  delete objectForPrint.sender;
+  delete objectForPrint.repository;
+  delete objectForPrint.organization;
+
+  console.log("\n\n----------------------------");
+  console.log("Event:", webhookObject.event_type);
+  console.log("Object:", JSON.stringify(objectForPrint));
+  console.log("----------------------------\n\n");
 
   try {
     await handleEvent(webhookObject, req.params.webhookId);

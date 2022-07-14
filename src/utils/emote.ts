@@ -36,7 +36,7 @@ export const emoteList = [
   },
   {
     name: "<:document:996473918888099950>",
-    regex: /.*(\.doc|\.docx|\.odt|\.pdf|\.rtf|\.tex|\.txt|\.wpd|\.wps)$/gu,
+    regex: /.*(\.doc|\.docx|\.odt|\.pdf|\.rtf|\.tex|\.txt|\.wpd|\.wps|\.md)$/gu,
   },
   {
     name: "<:ejs:996473923459887275>",
