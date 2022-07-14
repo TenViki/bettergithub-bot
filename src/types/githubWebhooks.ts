@@ -184,7 +184,7 @@ export interface GithubDelivery_WorkflowJob extends GithubDelivery {
 
 export interface GithubEvents {
   push: GithubDelivery_Push;
-  star: GithubDelivery_WorkflowJob;
+  workflow_job: GithubDelivery_WorkflowJob;
 }
 
 export type GithubDeliveryWebhook =
