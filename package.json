@@ -25,7 +25,7 @@
   },
   "scripts": {
     "dev": "ts-node-dev src/main.ts",
-    "build": "ts-node src/main.ts",
+    "build": "tsc",
     "start": "npm run build && node dist/index.js"
   }
 }
