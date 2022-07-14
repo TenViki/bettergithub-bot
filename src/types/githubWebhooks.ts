@@ -175,10 +175,10 @@ export interface GithubDelivery_WorkflowJob extends GithubDelivery {
     }[];
     check_run_url: string;
     labels: string[];
-    runner_id: number;
-    runner_name: string;
-    runner_group_id: number;
-    runner_group_name: string;
+    runner_id?: number;
+    runner_name?: string;
+    runner_group_id?: number;
+    runner_group_name?: string;
   };
 }
 
