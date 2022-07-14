@@ -196,9 +196,9 @@ export const emoteList = [
 export const formatFileName = (filepath: string) => {
   let fileName = filepath.split("/").pop();
   if (!fileName) fileName = filepath;
-  console.log(fileName);
 
   const fileEmote = emoteList.find((emote) => emote.regex.test(fileName!));
+  console.log(fileName, fileEmote);
 
   return `${fileEmote?.name || "<:file:996473939675054081>"} ${fileName}`;
 };
