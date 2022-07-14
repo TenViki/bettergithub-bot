@@ -1,5 +1,10 @@
 export const emoteList = [
   {
+    name: "<:nodejs:996474021883428936>",
+    regex:
+      /^(package\.json|gitignore-package-lock\.json|\.nvmrc|\.esmrc|\.node-version)$/u,
+  },
+  {
     name: "<:3d:996473862202065056>",
     regex:
       /.*(\.stl|\.obj|\.ac|\.blend|\.mesh|\.mqo|\.pmd|\.pmx|\.skp|\.vac|\.vdp|\.vox)$/u,
@@ -103,11 +108,6 @@ export const emoteList = [
   {
     name: "<:log:996474018116948059>",
     regex: /.*(\.log)$/u,
-  },
-  {
-    name: "<:nodejs:996474021883428936>",
-    regex:
-      /^(package\.json|gitignore-package-lock\.json|\.nvmrc|\.esmrc|\.node-version)$/u,
   },
   {
     name: "<:php:996474026295832677>",
