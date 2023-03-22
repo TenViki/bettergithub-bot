@@ -19,6 +19,7 @@ authRouter.post("/", async (req, res) => {
   try {
     data = await discordAuthService.getDiscordAuth(req.body.code);
   } catch (error) {
+    console.error(error);
     return res.status(401).send({ error: "Invalid code" });
   }
 

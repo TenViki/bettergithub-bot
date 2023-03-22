@@ -22,7 +22,7 @@ const main = async () => {
   // Use cors
   app.use(
     cors({
-      origin: ["http://localhost:3000"],
+      origin: ["http://localhost:3000", "https://bettergithub.vikithedev.eu", "http://bettergithub.vikithedev.eu"],
     })
   );
 
