@@ -182,11 +182,45 @@ export interface GithubDelivery_WorkflowJob extends GithubDelivery {
   };
 }
 
+export interface GithubDelivery_PullRequest extends GithubDelivery {
+  event_type: "pull_request";
+  action: "opened" | "closed" | "reopened" | "synchronize";
+  number: number;
+  pull_request: {
+    url: string;
+    id: number;
+    node_id: string;
+    html_url: string;
+    diff_url: string;
+    patch_url: string;
+    issue_url: string;
+    number: number;
+    state: string;
+    locked: boolean;
+    title: string;
+    body: string;
+    user: {
+      login: string;
+      id: number;
+      node_id: string;
+      avatar_url: string;
+      gravatar_id: string;
+      url: string;
+      html_url: string;
+      followers_url: string;
+      following_url: string;
+      gists_url: string;
+    };
+  };
+}
+
 export interface GithubEvents {
   push: GithubDelivery_Push;
   workflow_job: GithubDelivery_WorkflowJob;
+  pull_request: GithubDelivery_PullRequest;
 }
 
 export type GithubDeliveryWebhook =
   | GithubDelivery_Push
-  | GithubDelivery_WorkflowJob;
+  | GithubDelivery_WorkflowJob
+  | GithubDelivery_PullRequest;

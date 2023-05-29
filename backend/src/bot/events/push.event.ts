@@ -6,6 +6,15 @@ import { formatFileName } from "../../utils/emote";
 import { registerEvent } from "../bot";
 
 registerEvent("push", (event, bot, channel) => {
+  // write only 5 commits
+
+  let moreCommits = 0;
+
+  if (event.commits.length > 5) {
+    moreCommits = event.commits.length - 5;
+    event.commits = event.commits.slice(0, 5);
+  }
+
   const embed = createEmbed(
     `${event.repository.name} - ${event.ref.split("/").pop()} (${
       event.commits.length
@@ -38,7 +47,7 @@ ${commit.added
           )
           .join("")}`
       )
-      .join("\n"),
+      .join("\n") + (moreCommits > 0 ? `\nand ${moreCommits} more...` : ""),
     "#dba90a",
     event.sender
   );
