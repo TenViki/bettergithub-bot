@@ -1,0 +1,69 @@
+version: '3.8'
+
+services:
+  # MongoDB database
+  mongodb:
+    image: mongo:6
+    container_name: bettergithub-mongodb
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USERNAME:-admin}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD:-changeme}
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - bettergithub-network
+    # ports:
+    #   - "27017:27017"
+
+  # Backend service
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: bettergithub-backend
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      MONGO_URL:  ${MONGO_URL}
+      PORT: ${BACKEND_PORT:-3000}
+      # Add other environment variables from your .env file
+      DISCORD_APP_ID: ${DISCORD_APP_ID}
+      DISCORD_APP_SECRET: ${DISCORD_APP_SECRET}
+      BOT_TOKEN: ${BOT_TOKEN}
+      JWT_SECRET: ${JWT_SECRET}
+      FRONTEND_URL: ${FRONTEND_URL:-http://localhost}
+      DISCORD_REDIRECT_URI: ${DISCORD_REDIRECT_URI}
+    ports:
+      - "${BACKEND_PORT:-3000}:${BACKEND_PORT:-3000}"
+    depends_on:
+      - mongodb
+    networks:
+      - bettergithub-network
+    env_file:
+      - .env
+
+  # Frontend service
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: bettergithub-frontend
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      BACKEND_URL: ${BACKEND_URL:-http://localhost:3000}
+    ports:
+      - "${FRONTEND_PORT:-80}:80"
+    depends_on:
+      - backend
+    networks:
+      - bettergithub-network
+
+networks:
+  bettergithub-network:
+    driver: bridge
+
+volumes:
+  mongodb_data:
+    driver: local

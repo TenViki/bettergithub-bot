@@ -2,6 +2,7 @@ import { Client, TextChannel } from "discord.js";
 import { GithubEvents } from "../types/githubWebhooks";
 import * as fs from "fs/promises";
 import { Webhook } from "../models/webhook.model";
+import path from "path";
 
 export const bot = new Client({
   intents: ["GUILDS"],
@@ -12,11 +13,15 @@ const events = new Map<keyof GithubEvents, any>();
 
 export const setup = async () => {
   bot.login(process.env.BOT_TOKEN!);
-  const events = await fs.readdir(`./src/bot/events`);
-  for (const event of events) {
-    if (event.endsWith(".event.ts")) {
-      const eventName = event.replace(".ts", "");
-      await import(`./events/${eventName}`);
+  const eventsDir = path.join(__dirname, "events");
+  console.log("Loading events from:", eventsDir);
+  const eventFiles = await fs.readdir(eventsDir);
+  for (const event of eventFiles) {
+    if (event.endsWith(".event.js")) {
+      const eventName = event.replace(".js", "");
+      const eventPath = path.join(eventsDir, event);
+      console.log("Loading event:", eventPath);
+      await import(eventPath);
     }
   }
 };
